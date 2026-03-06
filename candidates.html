@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TalentFlow ATS - Candidates</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Preview Overlay -->
+    <div class="preview-overlay" id="previewOverlay"></div>
+
+    <!-- Drawer Overlay -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+
+    <!-- Left Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="logo-area">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="bi bi-people-fill"></i>
+                </div>
+                <span class="logo-text">iTalento</span>
+            </a>
+        </div>
+
+        <nav class="nav-section">
+            <div class="nav-item">
+                <a href="dashboard.html" class="nav-link">
+                    <i class="bi bi-grid-1x2-fill"></i>
+                    <span>Dashboard</span>
+                </a>
+            </div>
+
+            <div class="nav-item">
+                <a href="departments.html" class="nav-link">
+                    <i class="bi bi-building"></i>
+                    <span>Departments</span>
+                </a>
+            </div>
+
+            <div class="nav-item">
+                <a href="candidates.html" class="nav-link active">
+                    <i class="bi bi-person-lines-fill"></i>
+                    <span>Candidates</span>
+                    <span class="nav-badge" id="sidebarCandidateCount">156</span>
+                </a>
+            </div>
+
+            <div class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="bi bi-bar-chart-line"></i>
+                    <span>Reports</span>
+                </a>
+            </div>
+
+            <div class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="bi bi-gear"></i>
+                    <span>Settings</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <div class="filter-header">
+                <span>Quick Filters</span>
+                <button class="filter-toggle" id="filterToggle" type="button">
+                    <i class="bi bi-chevron-down"></i>
+                </button>
+            </div>
+
+            <div class="filter-content show" id="filterContent">
+                <div class="filter-group">
+                    <label class="filter-label">Department</label>
+                    <select class="filter-select">
+                        <option>All Departments</option>
+                        <option>Engineering</option>
+                        <option>Design</option>
+                        <option>Marketing</option>
+                        <option>Sales</option>
+                        <option>HR</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Job Status</label>
+                    <div class="filter-chips">
+                        <button class="filter-chip active" type="button">Active</button>
+                        <button class="filter-chip" type="button">Paused</button>
+                        <button class="filter-chip" type="button">Closed</button>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Location</label>
+                    <select class="filter-select">
+                        <option>All Locations</option>
+                        <option>Remote</option>
+                        <option>New York</option>
+                        <option>San Francisco</option>
+                        <option>London</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Recruiter</label>
+                    <select class="filter-select">
+                        <option>All Recruiters</option>
+                        <option>Sarah Johnson</option>
+                        <option>Mike Chen</option>
+                        <option>Emily Davis</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Date Range</label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox" checked />
+                        <span>Last 7 days</span>
+                    </label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox" />
+                        <span>Last 30 days</span>
+                    </label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox" />
+                        <span>This quarter</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        <!-- Top Navbar -->
+        <header class="top-navbar">
+            <div class="navbar-left">
+                <button class="menu-toggle" id="menuToggle" type="button">
+                    <i class="bi bi-list"></i>
+                </button>
+
+                <div class="search-bar">
+                    <i class="bi bi-search"></i>
+                    <input type="text" placeholder="Search candidates, jobs, or departments..." />
+                </div>
+
+                <button class="search-icon-mobile" id="searchMobileToggle" type="button">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+
+            <div class="navbar-actions">
+                <button class="notification-btn" id="notificationBtn" type="button">
+                    <i class="bi bi-bell"></i>
+                    <span class="notification-dot"></span>
+                </button>
+
+                <button class="btn-post-job" id="postJobBtn" type="button">
+                    <i class="bi bi-plus-lg"></i>
+                    <span>Post Job</span>
+                </button>
+
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="profile-avatar">Sr</div>
+                    <div class="profile-info">
+                        <span class="profile-name">Sr</span>
+                        <span class="profile-role">HR Manager</span>
+                    </div>
+                    <i class="bi bi-chevron-down"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Candidate Page Content -->
+        <div class="candidate-page">
+            <div class="page-header">
+                <div class="page-title-section">
+                    <h1>Candidates</h1>
+                    <p class="page-subtitle">Manage and track your candidate pipeline</p>
+                </div>
+
+                <div class="page-actions">
+
+                    <button class="btn-add-candidate" type="button" data-bs-toggle="modal"
+                        data-bs-target="#addCandidateModal">
+                        <i class="bi bi-person-plus"></i>
+                        Add Candidate
+                    </button>
+
+                    <button class="btn-customize" id="btnCustomize" type="button">
+                        <i class="bi bi-layout-three-columns"></i>
+                        Customize Columns
+                    </button>
+
+
+                </div>
+            </div>
+
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all" type="button">
+                    All Responses <span class="count" id="countAll">0</span>
+                </button>
+                <button class="filter-tab" data-filter="shortlist" type="button">
+                    Shortlisted <span class="count" id="countShortlist">0</span>
+                </button>
+                <button class="filter-tab" data-filter="maybe" type="button">
+                    Maybe <span class="count" id="countMaybe">0</span>
+                </button>
+                <button class="filter-tab" data-filter="reject" type="button">
+                    Rejected <span class="count" id="countReject">0</span>
+                </button>
+            </div>
+
+            <!-- Desktop Table -->
+            <div class="candidate-table-container table-container">
+                <div class="table-header">
+                    <div class="table-info" id="tableInfo">
+                        Showing <strong>0</strong> of <strong>0</strong> responses
+                    </div>
+
+                    <div class="table-actions">
+                        <div class="search-table">
+                            <i class="bi bi-search"></i>
+                            <input type="text" placeholder="Search candidates..." id="tableSearch" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-scroll-wrap">
+                    <table class="candidate-table">
+                        <thead>
+                            <tr>
+                                <th class="col-checkbox sticky-col sticky-checkbox">
+                                    <input type="checkbox" class="custom-checkbox" id="selectAll" />
+                                </th>
+                                <th class="col-avatar sticky-col sticky-avatar">Profile</th>
+                                <th class="col-name sticky-col sticky-name" data-column="name">Candidate Name</th>
+                                <th class="col-designation" data-column="designation">Designation</th>
+                                <th class="col-company" data-column="company">Company Name</th>
+                                <th class="col-skills" data-column="skills">Key Skills</th>
+                                <th class="col-phone" data-column="phone">Phone Number</th>
+                                <th class="col-status" data-column="status">Status</th>
+                                <th class="col-actions">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="candidateTableBody"></tbody>
+                    </table>
+                </div>
+
+                <div class="table-footer">
+                    <div class="pagination-info" id="paginationInfo">Showing 0 results</div>
+                    <div class="pagination">
+                        <button class="page-btn" disabled type="button">
+                            <i class="bi bi-chevron-left"></i>
+                        </button>
+                        <button class="page-btn active" type="button">1</button>
+                        <button class="page-btn" disabled type="button">
+                            <i class="bi bi-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Cards -->
+            <div class="mobile-cards" id="mobileCards"></div>
+        </div>
+    </div>
+
+    <!-- Candidate Preview Panel -->
+    <aside class="candidate-preview-panel" id="candidatePreviewPanel">
+        <div class="preview-panel-header">
+            <div class="preview-topbar">
+                <div class="preview-nav-group">
+                    <button class="preview-nav-btn" id="prevCandidateBtn" type="button">
+                        <i class="bi bi-chevron-left"></i>
+                        Prev
+                    </button>
+                    <button class="preview-nav-btn" id="nextCandidateBtn" type="button">
+                        Next
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+                </div>
+
+                <button class="preview-close-btn" id="closePreviewPanel" type="button">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+            <div class="preview-candidate-hero">
+                <img src="" alt="" class="preview-candidate-avatar" id="previewAvatar" />
+                <div class="preview-candidate-meta">
+                    <div class="preview-candidate-top">
+                        <h2 class="preview-candidate-name" id="previewName">Candidate Name</h2>
+                        <span class="badge-recommended" id="previewRecommendedBadge"
+                            style="display: none;">Recommended</span>
+                    </div>
+                    <p class="preview-summary-line" id="previewSummaryLine"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="preview-panel-body">
+            <div class="preview-section">
+                <div class="preview-actions-primary">
+                    <button class="btn-preview-primary btn-shortlist" id="previewShortlistBtn" type="button">
+                        <i class="bi bi-check-circle"></i>
+                        Shortlist
+                    </button>
+                    <button class="btn-preview-primary btn-maybe" id="previewMaybeBtn" type="button">
+                        <i class="bi bi-dash-circle"></i>
+                        Maybe
+                    </button>
+                    <button class="btn-preview-primary btn-reject" id="previewRejectBtn" type="button">
+                        <i class="bi bi-x-circle"></i>
+                        Reject
+                    </button>
+                </div>
+
+                <div class="preview-actions-secondary">
+                    <button class="btn-preview-secondary" type="button">
+                        <i class="bi bi-envelope"></i>
+                        Email
+                    </button>
+                    <button class="btn-preview-secondary" type="button">
+                        <i class="bi bi-forward"></i>
+                        Forward
+                    </button>
+                    <button class="btn-preview-secondary" type="button">
+                        <i class="bi bi-download"></i>
+                        Download
+                    </button>
+                    <button class="btn-preview-secondary" id="previewDeleteBtn" type="button">
+                        <i class="bi bi-trash3"></i>
+                        Delete
+                    </button>
+                </div>
+            </div>
+
+            <div class="preview-section">
+                <div class="section-title">Contact</div>
+
+                <div class="contact-grid">
+                    <div class="contact-info-main">
+                        <div class="contact-label">Phone Number</div>
+                        <div class="contact-value" id="previewPhone">-</div>
+                    </div>
+
+                    <button class="btn-phone" type="button">
+                        <i class="bi bi-telephone"></i>
+                        Contact
+                    </button>
+
+                    <button class="btn-phone" type="button">
+                        <i class="bi bi-headset"></i>
+                        Call from app
+                    </button>
+                </div>
+
+                <div class="preview-status-wrap">
+                    <div class="contact-label">Status</div>
+                    <div class="status-dropdown">
+                        <button class="btn-status" id="previewStatusBtn" type="button">
+                            <span class="status-content">
+                                <span class="status-dot shortlist"></span>
+                                <span>Set Status</span>
+                            </span>
+                            <i class="bi bi-chevron-down"></i>
+                        </button>
+                        <div class="status-menu">
+                            <div class="status-item" data-status="shortlist">
+                                <span class="status-dot shortlist"></span>
+                                Shortlist
+                            </div>
+                            <div class="status-item" data-status="maybe">
+                                <span class="status-dot maybe"></span>
+                                Maybe
+                            </div>
+                            <div class="status-item" data-status="reject">
+                                <span class="status-dot reject"></span>
+                                Reject
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-section">
+                <div class="preview-tabs">
+                    <button class="preview-tab active" data-tab="summary" type="button">Summary</button>
+                    <button class="preview-tab" data-tab="experience" type="button">Work Experience</button>
+                    <button class="preview-tab" data-tab="education" type="button">Education</button>
+                    <button class="preview-tab" data-tab="skills" type="button">IT Skills</button>
+                    <button class="preview-tab" data-tab="languages" type="button">Languages</button>
+                    <button class="preview-tab" data-tab="other" type="button">Other Details</button>
+                    <button class="preview-tab" data-tab="resume" type="button">Resume</button>
+                </div>
+
+                <div class="preview-tab-content active" id="tab-summary">
+                    <div class="info-list">
+                        <div class="info-item">
+                            <div class="info-item-label">Current Role</div>
+                            <div class="info-item-value" id="tabSummaryRole">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-item-label">Current Company</div>
+                            <div class="info-item-value" id="tabSummaryCompany">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-item-label">Professional Snapshot</div>
+                            <div class="info-item-value" id="tabSummaryText">-</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preview-tab-content" id="tab-experience">
+                    <div id="tabExperience"></div>
+                </div>
+
+                <div class="preview-tab-content" id="tab-education">
+                    <div class="info-list" id="tabEducation"></div>
+                </div>
+
+                <div class="preview-tab-content" id="tab-skills">
+                    <div class="skills-wrap" id="tabSkills"></div>
+                </div>
+
+                <div class="preview-tab-content" id="tab-languages">
+                    <div class="info-list" id="tabLanguages"></div>
+                </div>
+
+                <div class="preview-tab-content" id="tab-other">
+                    <div class="info-list" id="tabOther"></div>
+                </div>
+
+                <div class="preview-tab-content" id="tab-resume">
+                    <div class="resume-viewer">
+                        <div class="resume-toolbar">
+                            <div class="resume-toolbar-title">Resume Preview</div>
+                            <button class="btn-phone" type="button">
+                                <i class="bi bi-download"></i>
+                                Download Resume
+                            </button>
+                        </div>
+                        <div class="resume-paper" id="resumePaper"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-section">
+                <div class="section-title">AI Matched Similar Candidates</div>
+                <div id="similarCandidatesContainer"></div>
+                <button class="btn-view-all" type="button">View all similar candidates</button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Customize Columns Drawer -->
+    <div class="customize-drawer" id="customizeDrawer">
+        <div class="drawer-header">
+            <h2 class="drawer-title">Customize Columns</h2>
+            <button class="drawer-close" id="closeDrawer" type="button">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+
+        <div class="drawer-body">
+            <div class="drawer-section-title">Visible Columns</div>
+            <div class="column-list">
+                <div class="column-item">
+                    <input type="checkbox" id="col-name" checked disabled />
+                    <label for="col-name">Candidate Name</label>
+                </div>
+                <div class="column-item">
+                    <input type="checkbox" id="col-designation" checked />
+                    <label for="col-designation">Designation</label>
+                </div>
+                <div class="column-item">
+                    <input type="checkbox" id="col-company" checked />
+                    <label for="col-company">Company Name</label>
+                </div>
+                <div class="column-item">
+                    <input type="checkbox" id="col-skills" checked />
+                    <label for="col-skills">Key Skills</label>
+                </div>
+                <div class="column-item">
+                    <input type="checkbox" id="col-phone" checked />
+                    <label for="col-phone">Phone Number</label>
+                </div>
+                <div class="column-item">
+                    <input type="checkbox" id="col-status" checked disabled />
+                    <label for="col-status">Status</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="drawer-footer">
+            <button class="btn-drawer-secondary" id="cancelColumns" type="button">Cancel</button>
+            <button class="btn-drawer-primary" id="applyColumns" type="button">Apply</button>
+        </div>
+    </div>
+
+    <!-- Add Candidate Modal -->
+    <div class="modal fade" id="addCandidateModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <form id="addCandidateForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Candidate</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Candidate Name</label>
+                                <input type="text" class="form-control" id="candidateNameInput" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Phone Number</label>
+                                <input type="text" class="form-control" id="candidatePhoneInput" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Designation</label>
+                                <input type="text" class="form-control" id="candidateDesignationInput" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Company</label>
+                                <input type="text" class="form-control" id="candidateCompanyInput" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Location</label>
+                                <input type="text" class="form-control" id="candidateLocationInput" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Experience</label>
+                                <input type="text" class="form-control" id="candidateExperienceInput" />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Skills (comma separated)</label>
+                                <input type="text" class="form-control" id="candidateSkillsInput" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn-customize" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn-add-candidate">
+                            <i class="bi bi-person-plus"></i>
+                            Save Candidate
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/candidate.js"></script>
+</body>
+
+</html>

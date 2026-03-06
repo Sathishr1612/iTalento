@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TalentFlow ATS - Dashboard</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+
+</head>
+
+<body>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Left Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="logo-area">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="bi bi-people-fill"></i>
+                </div>
+                <span class="logo-text">iTalento</span>
+            </a>
+        </div>
+
+        <nav class="nav-section">
+            <div class="nav-item">
+                <a href="dashboard.html" class="nav-link active">
+                    <i class="bi bi-grid-1x2-fill"></i>
+                    <span>Dashboard</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="departments.html" class="nav-link">
+                    <i class="bi bi-building"></i>
+                    <span>Departments</span>
+                </a>
+            </div>
+            <!-- <div class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="bi bi-briefcase"></i>
+                    <span>Jobs</span>
+                    <span class="nav-badge">24</span>
+                </a>
+            </div> -->
+            <div class="nav-item">
+                <a href="candidates.html" class="nav-link">
+                    <i class="bi bi-person-lines-fill"></i>
+                    <span>Candidates</span>
+                    <span class="nav-badge">156</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="bi bi-bar-chart-line"></i>
+                    <span>Reports</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="bi bi-gear"></i>
+                    <span>Settings</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <div class="filter-header">
+                <span>Quick Filters</span>
+                <button class="filter-toggle" id="filterToggle">
+                    <i class="bi bi-chevron-down"></i>
+                </button>
+            </div>
+
+            <div class="filter-content show" id="filterContent">
+                <div class="filter-group">
+                    <label class="filter-label">Department</label>
+                    <select class="filter-select">
+                        <option>All Departments</option>
+                        <option>Engineering</option>
+                        <option>Design</option>
+                        <option>Marketing</option>
+                        <option>Sales</option>
+                        <option>HR</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Job Status</label>
+                    <div class="filter-chips">
+                        <button class="filter-chip active">Active</button>
+                        <button class="filter-chip">Paused</button>
+                        <button class="filter-chip">Closed</button>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Location</label>
+                    <select class="filter-select">
+                        <option>All Locations</option>
+                        <option>Remote</option>
+                        <option>New York</option>
+                        <option>San Francisco</option>
+                        <option>London</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Recruiter</label>
+                    <select class="filter-select">
+                        <option>All Recruiters</option>
+                        <option>Sarah Johnson</option>
+                        <option>Mike Chen</option>
+                        <option>Emily Davis</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Date Range</label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox" checked>
+                        <span>Last 7 days</span>
+                    </label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox">
+                        <span>Last 30 days</span>
+                    </label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox">
+                        <span>This quarter</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        <!-- Top Navbar -->
+        <header class="top-navbar">
+            <div class="navbar-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="bi bi-list"></i>
+                </button>
+
+                <div class="search-bar">
+                    <i class="bi bi-search"></i>
+                    <input type="text" placeholder="Search candidates, jobs, or departments...">
+                </div>
+
+                <button class="search-icon-mobile" id="searchMobileToggle">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+
+            <div class="navbar-actions">
+                <button class="notification-btn" id="notificationBtn">
+                    <i class="bi bi-bell"></i>
+                    <span class="notification-dot"></span>
+                </button>
+                <button class="btn-post-job" id="postJobBtn">
+                    <i class="bi bi-plus-lg"></i>
+                    <span>Post Job</span>
+                </button>
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="profile-avatar">Sr</div>
+                    <div class="profile-info">
+                        <span class="profile-name">Sr</span>
+                        <span class="profile-role">HR Manager</span>
+                    </div>
+                    <i class="bi bi-chevron-down"></i>
+                </div>
+
+
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <main class="dashboard-content">
+            <!-- Welcome Header -->
+            <div class="welcome-header">
+                <h1 class="welcome-title">Dashboard Overview</h1>
+                <p class="welcome-subtitle">Welcome back! Here's what's happening with your hiring today.</p>
+            </div>
+
+            <!-- Stats Row -->
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon blue">
+                            <i class="bi bi-people"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">156</div>
+                    <div class="stat-label">Total Candidates</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon teal">
+                            <i class="bi bi-person-plus"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">24</div>
+                    <div class="stat-label">New</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon purple">
+                            <i class="bi bi-bookmark-star"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">42</div>
+                    <div class="stat-label">Shortlisted</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon orange">
+                            <i class="bi bi-calendar-event"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">18</div>
+                    <div class="stat-label">Interview</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon green">
+                            <i class="bi bi-check-circle"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">12</div>
+                    <div class="stat-label">Hired</div>
+                </div>
+            </div>
+
+            <!-- Hiring Pipeline Chart -->
+            <div class="chart-section">
+                <div class="chart-card">
+                    <div class="card-header-flex">
+                        <h3 class="card-title">Hiring Pipeline</h3>
+                        <div class="card-actions">
+                            <button class="btn-icon" title="Download"><i class="bi bi-download"></i></button>
+                            <button class="btn-icon" title="More options"><i
+                                    class="bi bi-three-dots-vertical"></i></button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="pipelineChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Departments Section -->
+            <div class="departments-section">
+                <!-- <div class="section-header">
+                    <h3 class="card-title">Departments Overview</h3>
+                    <button class="view-all-btn">View All</button>
+                </div> -->
+                <div class="dept-grid" id="deptGrid">
+
+                </div>
+            </div>
+
+            <!-- Activity Section -->
+            <div class="activity-section">
+                <div class="activity-grid">
+                    <!-- AI Recommendations -->
+                    <div class="activity-card">
+                        <div class="activity-header">
+                            <h4 class="activity-title">
+                                <i class="bi bi-stars"></i>
+                                AI Recommended
+                            </h4>
+                            <span class="ai-badge">AI</span>
+                        </div>
+                        <div id="recommendationsList">
+                            <!-- Rendered by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Interview Reminders -->
+                    <div class="activity-card">
+                        <div class="activity-header">
+                            <h4 class="activity-title">
+                                <i class="bi bi-calendar-event"></i>
+                                Today's Interviews
+                            </h4>
+                        </div>
+                        <div id="interviewReminders">
+                            <!-- Rendered by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="activity-card">
+                        <div class="activity-header">
+                            <h4 class="activity-title">
+                                <i class="bi bi-activity"></i>
+                                Recent Activity
+                            </h4>
+                        </div>
+                        <div class="timeline" id="activityTimeline">
+                            <!-- Rendered by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+
+</html>
