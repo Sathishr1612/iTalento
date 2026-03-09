@@ -447,4 +447,71 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+//  ADD BUTTON JS ============
 
+        const departmentModal = document.getElementById('departmentModal');
+        const addDepartmentBtn = document.getElementById('addDepartmentBtn');
+        const closeDepartmentModal = document.getElementById('closeDepartmentModal');
+        const cancelDepartmentModal = document.getElementById('cancelDepartmentModal');
+        const departmentDate = document.getElementById('departmentDate');
+        const departmentDay = document.getElementById('departmentDay');
+        const departmentForm = document.getElementById('departmentForm');
+
+        function openDepartmentPopup() {
+            departmentModal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDepartmentPopup() {
+            departmentModal.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        if (addDepartmentBtn) {
+            addDepartmentBtn.addEventListener('click', openDepartmentPopup);
+        }
+
+        if (closeDepartmentModal) {
+            closeDepartmentModal.addEventListener('click', closeDepartmentPopup);
+        }
+
+        if (cancelDepartmentModal) {
+            cancelDepartmentModal.addEventListener('click', closeDepartmentPopup);
+        }
+
+        if (departmentModal) {
+            departmentModal.addEventListener('click', function (e) {
+                if (e.target === departmentModal) {
+                    closeDepartmentPopup();
+                }
+            });
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && departmentModal.classList.contains('show')) {
+                closeDepartmentPopup();
+            }
+        });
+
+        if (departmentDate && departmentDay) {
+            departmentDate.addEventListener('change', function () {
+                const selectedDate = new Date(this.value);
+                if (!isNaN(selectedDate.getTime())) {
+                    departmentDay.value = selectedDate.toLocaleDateString('en-US', {
+                        weekday: 'long'
+                    });
+                } else {
+                    departmentDay.value = '';
+                }
+            });
+        }
+
+        if (departmentForm) {
+            departmentForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                alert('Department saved successfully');
+                this.reset();
+                departmentDay.value = '';
+                closeDepartmentPopup();
+            });
+        }
