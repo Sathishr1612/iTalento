@@ -398,9 +398,9 @@ document.getElementById('notificationBtn').addEventListener('click', function ()
     alert('Opening notifications...');
 });
 
-document.getElementById('profileDropdown').addEventListener('click', function () {
-    alert('Opening profile menu...');
-});
+// document.getElementById('profileDropdown').addEventListener('click', function () {
+//     alert('Opening profile menu...');
+// });
 
 document.getElementById('searchMobileToggle').addEventListener('click', function () {
     alert('Opening mobile search...');
@@ -515,3 +515,29 @@ document.addEventListener("DOMContentLoaded", function () {
                 closeDepartmentPopup();
             });
         }
+        
+/* ============================================
+        profile dropdown
+     ============================================ */
+
+        const profileDropdownWrap = document.getElementById("profileDropdownWrap");
+const profileDropdown = document.getElementById("profileDropdown");
+
+if (profileDropdown && profileDropdownWrap) {
+  profileDropdown.addEventListener("click", function (e) {
+    e.stopPropagation();
+    profileDropdownWrap.classList.toggle("open");
+  });
+
+  document.addEventListener("click", function (e) {
+    if (!profileDropdownWrap.contains(e.target)) {
+      profileDropdownWrap.classList.remove("open");
+    }
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+      profileDropdownWrap.classList.remove("open");
+    }
+  });
+}

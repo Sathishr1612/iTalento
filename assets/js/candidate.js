@@ -1156,3 +1156,29 @@ if (applyMasterFilters) {
     closeMasterFilterDrawer();
   });
 }
+
+/* ============================================
+        profile dropdown
+     ============================================ */
+
+     const profileDropdownWrap = document.getElementById("profileDropdownWrap");
+const profileDropdown = document.getElementById("profileDropdown");
+
+if (profileDropdown && profileDropdownWrap) {
+  profileDropdown.addEventListener("click", function (e) {
+    e.stopPropagation();
+    profileDropdownWrap.classList.toggle("open");
+  });
+
+  document.addEventListener("click", function (e) {
+    if (!profileDropdownWrap.contains(e.target)) {
+      profileDropdownWrap.classList.remove("open");
+    }
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+      profileDropdownWrap.classList.remove("open");
+    }
+  });
+}
