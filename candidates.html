@@ -68,7 +68,7 @@
             </div> -->
 
             <div class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="settings.html" class="nav-link">
                     <i class="bi bi-gear"></i>
                     <span>Settings</span>
                 </a>
@@ -171,10 +171,10 @@
                     <span class="notification-dot"></span>
                 </button>
 
-                <button class="btn-post-job" id="postJobBtn" type="button">
+                <!-- <button class="btn-post-job" id="postJobBtn" type="button">
                     <i class="bi bi-plus-lg"></i>
                     <span>Post Job</span>
-                </button>
+                </button> -->
 
                <div class="profile-dropdown-wrap" id="profileDropdownWrap">
                     <button class="profile-dropdown" id="profileDropdown" type="button">
@@ -547,45 +547,129 @@
     <!-- Customize Columns Drawer -->
     <div class="customize-drawer" id="customizeDrawer">
         <div class="drawer-header">
-            <h2 class="drawer-title">Customize Columns</h2>
+            <div class="drawer-header-left">
+                <div class="drawer-header-icon">
+                    <i class="bi bi-layout-three-columns"></i>
+                </div>
+                <div>
+                    <h2 class="drawer-title">Customize Columns</h2>
+                    <p class="drawer-subtitle">Drag to reorder • Toggle to show/hide</p>
+                </div>
+            </div>
             <button class="drawer-close" id="closeDrawer" type="button">
                 <i class="bi bi-x-lg"></i>
             </button>
         </div>
 
         <div class="drawer-body">
-            <div class="drawer-section-title">Visible Columns</div>
-            <div class="column-list">
-                <div class="column-item">
-                    <input type="checkbox" id="col-name" checked disabled />
-                    <label for="col-name">Candidate Name</label>
+            <div class="drawer-section-header">
+                <span class="drawer-section-title">Column Visibility & Order</span>
+                <span class="drawer-section-hint"><i class="bi bi-arrows-move"></i> Drag to reorder</span>
+            </div>
+
+            <div class="column-list dnd-list" id="columnDndList">
+
+                <!-- Fixed: Candidate Name -->
+                <div class="column-item column-item-locked" data-col="name">
+                    <div class="col-drag-handle locked">
+                        <i class="bi bi-lock-fill"></i>
+                    </div>
+                    <div class="col-item-icon name-icon">
+                        <i class="bi bi-person-fill"></i>
+                    </div>
+                    <span class="col-item-label">Candidate Name</span>
+                    <span class="col-locked-badge">Required</span>
+                    <input type="checkbox" id="col-name" checked disabled class="col-toggle" />
                 </div>
-                <div class="column-item">
-                    <input type="checkbox" id="col-designation" checked />
-                    <label for="col-designation">Designation</label>
+
+                <!-- Designation -->
+                <div class="column-item" draggable="true" data-col="designation">
+                    <div class="col-drag-handle">
+                        <i class="bi bi-grip-vertical"></i>
+                    </div>
+                    <div class="col-item-icon designation-icon">
+                        <i class="bi bi-briefcase-fill"></i>
+                    </div>
+                    <span class="col-item-label">Designation</span>
+                    <label class="col-toggle-wrap">
+                        <input type="checkbox" id="col-designation" checked class="col-toggle col-toggle-real" />
+                        <span class="col-toggle-slider"></span>
+                    </label>
                 </div>
-                <div class="column-item">
-                    <input type="checkbox" id="col-company" checked />
-                    <label for="col-company">Company Name</label>
+
+                <!-- Company Name -->
+                <div class="column-item" draggable="true" data-col="company">
+                    <div class="col-drag-handle">
+                        <i class="bi bi-grip-vertical"></i>
+                    </div>
+                    <div class="col-item-icon company-icon">
+                        <i class="bi bi-building-fill"></i>
+                    </div>
+                    <span class="col-item-label">Company Name</span>
+                    <label class="col-toggle-wrap">
+                        <input type="checkbox" id="col-company" checked class="col-toggle col-toggle-real" />
+                        <span class="col-toggle-slider"></span>
+                    </label>
                 </div>
-                <div class="column-item">
-                    <input type="checkbox" id="col-skills" checked />
-                    <label for="col-skills">Key Skills</label>
+
+                <!-- Key Skills -->
+                <div class="column-item" draggable="true" data-col="skills">
+                    <div class="col-drag-handle">
+                        <i class="bi bi-grip-vertical"></i>
+                    </div>
+                    <div class="col-item-icon skills-icon">
+                        <i class="bi bi-stars"></i>
+                    </div>
+                    <span class="col-item-label">Key Skills</span>
+                    <label class="col-toggle-wrap">
+                        <input type="checkbox" id="col-skills" checked class="col-toggle col-toggle-real" />
+                        <span class="col-toggle-slider"></span>
+                    </label>
                 </div>
-                <div class="column-item">
-                    <input type="checkbox" id="col-phone" checked />
-                    <label for="col-phone">Phone Number</label>
+
+                <!-- Phone Number -->
+                <div class="column-item" draggable="true" data-col="phone">
+                    <div class="col-drag-handle">
+                        <i class="bi bi-grip-vertical"></i>
+                    </div>
+                    <div class="col-item-icon phone-icon">
+                        <i class="bi bi-telephone-fill"></i>
+                    </div>
+                    <span class="col-item-label">Phone Number</span>
+                    <label class="col-toggle-wrap">
+                        <input type="checkbox" id="col-phone" checked class="col-toggle col-toggle-real" />
+                        <span class="col-toggle-slider"></span>
+                    </label>
                 </div>
-                <div class="column-item">
-                    <input type="checkbox" id="col-status" checked disabled />
-                    <label for="col-status">Status</label>
+
+                <!-- Fixed: Status -->
+                <div class="column-item column-item-locked" data-col="status">
+                    <div class="col-drag-handle locked">
+                        <i class="bi bi-lock-fill"></i>
+                    </div>
+                    <div class="col-item-icon status-icon">
+                        <i class="bi bi-circle-fill"></i>
+                    </div>
+                    <span class="col-item-label">Status</span>
+                    <span class="col-locked-badge">Required</span>
+                    <input type="checkbox" id="col-status" checked disabled class="col-toggle" />
                 </div>
+
+            </div>
+
+            <div class="drawer-info-box">
+                <i class="bi bi-info-circle"></i>
+                <span>Drag column rows to change their display order in the table.</span>
             </div>
         </div>
 
         <div class="drawer-footer">
-            <button class="btn-drawer-secondary" id="cancelColumns" type="button">Cancel</button>
-            <button class="btn-drawer-primary" id="applyColumns" type="button">Apply</button>
+            <button class="btn-drawer-secondary" id="cancelColumns" type="button">
+                <i class="bi bi-x"></i> Cancel
+            </button>
+            <button class="btn-drawer-primary" id="applyColumns" type="button">
+                <i class="bi bi-check2"></i> Apply Changes
+            </button>
         </div>
     </div>
 

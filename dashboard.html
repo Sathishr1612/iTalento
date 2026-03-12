@@ -13,6 +13,8 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
+
+
 </head>
 
 <body>
@@ -32,41 +34,50 @@
 
         <nav class="nav-section">
             <div class="nav-item">
-                <a href="index.html" class="nav-link active">
+                <a href="dashboard.html" class="nav-link active">
                     <i class="bi bi-grid-1x2-fill"></i>
                     <span>Dashboard</span>
                 </a>
             </div>
-
             <div class="nav-item">
                 <a href="departments.html" class="nav-link">
                     <i class="bi bi-building"></i>
                     <span>Departments</span>
                 </a>
             </div>
-
+            <!-- <div class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="bi bi-briefcase"></i>
+                    <span>Jobs</span>
+                    <span class="nav-badge">24</span>
+                </a>
+            </div> -->
             <div class="nav-item">
                 <a href="candidates.html" class="nav-link">
                     <i class="bi bi-person-lines-fill"></i>
                     <span>Candidates</span>
-                    <span class="nav-badge" id="sidebarCandidateCount">156</span>
+                    <span class="nav-badge">156</span>
                 </a>
             </div>
-
-             <div class="nav-item">
-                <a href="settings.html" class="nav-link">
+            <div class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="bi bi-bar-chart-line"></i>
+                    <span>Reports</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link">
                     <i class="bi bi-gear"></i>
                     <span>Settings</span>
                 </a>
             </div>
-
         </nav>
 
         <!-- Filter Section -->
         <div class="filter-section">
             <div class="filter-header">
                 <span>Quick Filters</span>
-                <button class="filter-toggle" id="filterToggle" type="button">
+                <button class="filter-toggle" id="filterToggle">
                     <i class="bi bi-chevron-down"></i>
                 </button>
             </div>
@@ -87,9 +98,9 @@
                 <div class="filter-group">
                     <label class="filter-label">Job Status</label>
                     <div class="filter-chips">
-                        <button class="filter-chip active" type="button">Active</button>
-                        <button class="filter-chip" type="button">Paused</button>
-                        <button class="filter-chip" type="button">Closed</button>
+                        <button class="filter-chip active">Active</button>
+                        <button class="filter-chip">Paused</button>
+                        <button class="filter-chip">Closed</button>
                     </div>
                 </div>
 
@@ -138,7 +149,7 @@
         <!-- Top Navbar -->
         <header class="top-navbar">
             <div class="navbar-left">
-                <button class="menu-toggle" id="menuToggle" type="button">
+                <button class="menu-toggle" id="menuToggle">
                     <i class="bi bi-list"></i>
                 </button>
 
@@ -147,73 +158,27 @@
                     <input type="text" placeholder="Search candidates, jobs, or departments...">
                 </div>
 
-                <button class="search-icon-mobile" id="searchMobileToggle" type="button">
+                <button class="search-icon-mobile" id="searchMobileToggle">
                     <i class="bi bi-search"></i>
                 </button>
             </div>
 
             <div class="navbar-actions">
-                <button class="notification-btn" id="notificationBtn" type="button">
+                <button class="notification-btn" id="notificationBtn">
                     <i class="bi bi-bell"></i>
                     <span class="notification-dot"></span>
                 </button>
 
-                <!-- <button class="btn-post-job" id="postJobBtn" type="button">
-                    <i class="bi bi-plus-lg"></i>
-                    <span>Post Job</span>
-                </button> -->
-
-                <div class="profile-dropdown-wrap" id="profileDropdownWrap">
-                    <button class="profile-dropdown" id="profileDropdown" type="button">
-                        <div class="profile-avatar">Sr</div>
-                        <div class="profile-info">
-                            <span class="profile-name">Sr</span>
-                            <span class="profile-role">HR Manager</span>
-                        </div>
-                        <i class="bi bi-chevron-down profile-caret"></i>
-                    </button>
-
-                    <div class="profile-menu" id="profileMenu">
-                        <div class="profile-menu-header">
-                            <div class="profile-menu-email">hr@italento.com</div>
-                        </div>
-
-                        <button class="profile-menu-item" type="button">
-                            <i class="bi bi-people-fill"></i>
-                            <span>Manage Admin</span>
-                        </button>
-
-                        <button class="profile-menu-item" type="button">
-                            <i class="bi bi-person-fill"></i>
-                            <span>Manage User</span>
-                        </button>
-
-                        <button class="profile-menu-item" type="button">
-                            <i class="bi bi-envelope-fill"></i>
-                            <span>Mail History</span>
-                        </button>
-
-                        <button class="profile-menu-item" type="button">
-                            <i class="bi bi-calendar-event"></i>
-                            <span>Scheduled Meetings</span>
-                        </button>
-
-                        <button class="profile-menu-item" type="button">
-                            <i class="bi bi-gear-fill"></i>
-                            <span>Settings</span>
-                        </button>
-
-                        <button class="profile-menu-item" type="button">
-                            <i class="bi bi-arrow-counterclockwise"></i>
-                            <span>Unassign Candidates</span>
-                        </button>
-
-                        <button class="profile-menu-item logout" type="button">
-                            <i class="bi bi-power"></i>
-                            <span>Logout</span>
-                        </button>
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="profile-avatar">Sr</div>
+                    <div class="profile-info">
+                        <span class="profile-name">Sr</span>
+                        <span class="profile-role">HR Manager</span>
                     </div>
+                    <i class="bi bi-chevron-down"></i>
                 </div>
+
+
             </div>
         </header>
 
@@ -227,53 +192,53 @@
 
             <!-- Stats Row -->
             <div class="stats-row">
-                <div class="stat-card clickable-stat" data-filter="all">
+                <div class="stat-card">
                     <div class="stat-header">
                         <div class="stat-icon blue">
                             <i class="bi bi-people"></i>
                         </div>
                     </div>
-                    <div class="stat-value" id="statTotalCandidates">156</div>
+                    <div class="stat-value">156</div>
                     <div class="stat-label">Total Candidates</div>
                 </div>
 
-                <div class="stat-card clickable-stat" data-filter="new">
+                <div class="stat-card">
                     <div class="stat-header">
                         <div class="stat-icon teal">
                             <i class="bi bi-person-plus"></i>
                         </div>
                     </div>
-                    <div class="stat-value" id="statNewCandidates">24</div>
+                    <div class="stat-value">24</div>
                     <div class="stat-label">New</div>
                 </div>
 
-                <div class="stat-card clickable-stat" data-filter="shortlist">
+                <div class="stat-card">
                     <div class="stat-header">
                         <div class="stat-icon purple">
                             <i class="bi bi-bookmark-star"></i>
                         </div>
                     </div>
-                    <div class="stat-value" id="statShortlistedCandidates">42</div>
+                    <div class="stat-value">42</div>
                     <div class="stat-label">Shortlisted</div>
                 </div>
 
-                <div class="stat-card clickable-stat" data-filter="interview">
+                <div class="stat-card">
                     <div class="stat-header">
                         <div class="stat-icon orange">
                             <i class="bi bi-calendar-event"></i>
                         </div>
                     </div>
-                    <div class="stat-value" id="statInterviewCandidates">18</div>
+                    <div class="stat-value">18</div>
                     <div class="stat-label">Interview</div>
                 </div>
 
-                <div class="stat-card clickable-stat" data-filter="hired">
+                <div class="stat-card">
                     <div class="stat-header">
                         <div class="stat-icon green">
                             <i class="bi bi-check-circle"></i>
                         </div>
                     </div>
-                    <div class="stat-value" id="statHiredCandidates">12</div>
+                    <div class="stat-value">12</div>
                     <div class="stat-label">Hired</div>
                 </div>
             </div>
@@ -284,12 +249,9 @@
                     <div class="card-header-flex">
                         <h3 class="card-title">Hiring Pipeline</h3>
                         <div class="card-actions">
-                            <button class="btn-icon" title="Download" type="button">
-                                <i class="bi bi-download"></i>
-                            </button>
-                            <button class="btn-icon" title="More options" type="button">
-                                <i class="bi bi-three-dots-vertical"></i>
-                            </button>
+                            <button class="btn-icon" title="Download"><i class="bi bi-download"></i></button>
+                            <button class="btn-icon" title="More options"><i
+                                    class="bi bi-three-dots-vertical"></i></button>
                         </div>
                     </div>
                     <div class="chart-container">
@@ -300,7 +262,13 @@
 
             <!-- Departments Section -->
             <div class="departments-section">
-                <div class="dept-grid" id="deptGrid"></div>
+                <!-- <div class="section-header">
+                    <h3 class="card-title">Departments Overview</h3>
+                    <button class="view-all-btn">View All</button>
+                </div> -->
+                <div class="dept-grid" id="deptGrid">
+
+                </div>
             </div>
 
             <!-- Activity Section -->

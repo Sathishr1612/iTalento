@@ -390,9 +390,9 @@ document.querySelectorAll('.filter-chip').forEach(chip => {
 });
 
 // Button handlers
-document.getElementById('postJobBtn').addEventListener('click', function () {
-    alert('Opening job posting form...');
-});
+// document.getElementById('postJobBtn').addEventListener('click', function () {
+//     alert('Opening job posting form...');
+// });
 
 document.getElementById('notificationBtn').addEventListener('click', function () {
     alert('Opening notifications...');

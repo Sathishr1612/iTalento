@@ -304,7 +304,22 @@ function setupEventListeners() {
       if (colPhone) visibleColumns.phone = colPhone.checked;
 
       applyColumnVisibility();
-      closeDrawer();
+      applyColumnOrder();
+
+      // Animated success feedback on the button
+      const btn = document.getElementById("applyColumns");
+      if (btn) {
+        const origHTML = btn.innerHTML;
+        btn.innerHTML = '<i class="bi bi-check-circle-fill"></i> Applied!';
+        btn.style.background = 'linear-gradient(135deg,#10b981,#059669)';
+        setTimeout(() => {
+          btn.innerHTML = origHTML;
+          btn.style.background = '';
+          closeDrawer();
+        }, 800);
+      } else {
+        closeDrawer();
+      }
     });
   }
 
@@ -1182,3 +1197,173 @@ if (profileDropdown && profileDropdownWrap) {
     }
   });
 }
+
+/* ============================================================
+   COLUMN DRAG & DROP ENGINE
+   ============================================================ */
+
+let columnDragSrc = null;
+
+function initColumnDnD() {
+  const list = document.getElementById("columnDndList");
+  if (!list) return;
+
+  function getDraggables() {
+    return [...list.querySelectorAll(".column-item[draggable='true']")];
+  }
+
+  function clearDropStates() {
+    list.querySelectorAll(".column-item").forEach(el => {
+      el.classList.remove("drag-over", "drag-drop-above", "drag-drop-below");
+    });
+  }
+
+  function getInsertPosition(target, clientY) {
+    const rect = target.getBoundingClientRect();
+    const midY = rect.top + rect.height / 2;
+    return clientY < midY ? "above" : "below";
+  }
+
+  getDraggables().forEach(item => {
+
+    item.addEventListener("dragstart", function (e) {
+      columnDragSrc = this;
+      this.classList.add("dragging");
+      e.dataTransfer.effectAllowed = "move";
+      e.dataTransfer.setData("text/plain", this.dataset.col);
+
+      // Custom ghost: slightly transparent clone
+      const ghost = this.cloneNode(true);
+      ghost.style.cssText = `
+        position: absolute; top: -999px; left: -999px;
+        width: ${this.offsetWidth}px;
+        opacity: 0.92;
+        border-radius: 14px;
+        box-shadow: 0 20px 50px rgba(15,23,42,0.22);
+        pointer-events: none;
+        background: #fff;
+        border: 2px solid var(--primary-teal);
+        padding: 13px 14px;
+        display: flex; align-items: center; gap: 12px;
+      `;
+      document.body.appendChild(ghost);
+      e.dataTransfer.setDragImage(ghost, ghost.offsetWidth / 2, ghost.offsetHeight / 2);
+      setTimeout(() => ghost.remove(), 0);
+    });
+
+    item.addEventListener("dragend", function () {
+      this.classList.remove("dragging");
+      clearDropStates();
+      columnDragSrc = null;
+    });
+
+    item.addEventListener("dragover", function (e) {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = "move";
+      if (!columnDragSrc || this === columnDragSrc) return;
+
+      clearDropStates();
+      const pos = getInsertPosition(this, e.clientY);
+      this.classList.add(pos === "above" ? "drag-drop-above" : "drag-drop-below");
+    });
+
+    item.addEventListener("dragleave", function (e) {
+      // Only clear if leaving to outside the item
+      if (!this.contains(e.relatedTarget)) {
+        this.classList.remove("drag-over", "drag-drop-above", "drag-drop-below");
+      }
+    });
+
+    item.addEventListener("drop", function (e) {
+      e.preventDefault();
+      if (!columnDragSrc || this === columnDragSrc) {
+        clearDropStates();
+        return;
+      }
+
+      const pos = getInsertPosition(this, e.clientY);
+
+      if (pos === "above") {
+        list.insertBefore(columnDragSrc, this);
+      } else {
+        list.insertBefore(columnDragSrc, this.nextSibling);
+      }
+
+      clearDropStates();
+
+      // Animate the dropped item
+      columnDragSrc.style.transition = "box-shadow 0.3s ease";
+      columnDragSrc.style.boxShadow = "0 12px 32px rgba(45,138,134,0.22)";
+      setTimeout(() => {
+        if (columnDragSrc) {
+          columnDragSrc.style.boxShadow = "";
+        }
+      }, 400);
+    });
+  });
+}
+
+/* ============================================================
+   APPLY COLUMN ORDER — syncs the DnD list order to the table
+   ============================================================ */
+
+function applyColumnOrder() {
+  const list = document.getElementById("columnDndList");
+  if (!list) return;
+
+  // Gather ordered column keys from the drawer DOM
+  const orderedCols = [...list.querySelectorAll(".column-item")].map(el => el.dataset.col);
+
+  const thead = document.querySelector(".candidate-table thead tr");
+  const tbody = document.getElementById("candidateTableBody");
+  if (!thead) return;
+
+  // Map data-column attr → th element
+  // Fixed columns (checkbox, avatar, name, actions) stay in place — only reorder the data columns
+  const dataColMap = {};
+  thead.querySelectorAll("th[data-column]").forEach(th => {
+    dataColMap[th.dataset.column] = th;
+  });
+
+  // Reorder th elements in thead according to orderedCols
+  // We'll insert them right after the sticky-name th (fixed left columns keep their position)
+  const stickyName = thead.querySelector(".sticky-name");
+  const actionsCol = thead.querySelector(".col-actions");
+  if (!stickyName || !actionsCol) return;
+
+  orderedCols.forEach(col => {
+    if (dataColMap[col]) {
+      // Insert before actions column
+      thead.insertBefore(dataColMap[col], actionsCol);
+    }
+  });
+
+  // Reorder td cells in every body row to match new th order
+  if (tbody) {
+    const thOrder = [...thead.querySelectorAll("th")].map(th => th.className);
+
+    tbody.querySelectorAll("tr").forEach(row => {
+      const cells = [...row.querySelectorAll("td")];
+
+      // Build a map from class → td
+      const cellMap = {};
+      cells.forEach(td => {
+        const keys = td.className.split(" ").filter(c => c.startsWith("col-"));
+        if (keys.length) cellMap[keys[0]] = td;
+      });
+
+      // Rebuild row in th order
+      [...thead.querySelectorAll("th")].forEach(th => {
+        const key = [...th.classList].find(c => c.startsWith("col-"));
+        if (key && cellMap[key]) {
+          row.appendChild(cellMap[key]);
+        }
+      });
+    });
+  }
+}
+
+/* Init DnD on DOM ready */
+document.addEventListener("DOMContentLoaded", function () {
+  initColumnDnD();
+});
