@@ -390,9 +390,18 @@ document.querySelectorAll('.filter-chip').forEach(chip => {
 });
 
 // Button handlers
+<<<<<<< HEAD
 // document.getElementById('postJobBtn').addEventListener('click', function () {
 //     alert('Opening job posting form...');
 // });
+=======
+const postJobBtn = document.getElementById('postJobBtn');
+if (postJobBtn) {
+    postJobBtn.addEventListener('click', function () {
+        alert('Opening job posting form...');
+    });
+}
+>>>>>>> 9ecc97eb80ba2736e0490d035b3dce6d7b4fe6fb
 
 document.getElementById('notificationBtn').addEventListener('click', function () {
     alert('Opening notifications...');

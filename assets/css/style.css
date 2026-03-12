@@ -1315,6 +1315,7 @@ body {
     flex-wrap: wrap;
 }
 
+
 .btn-customize,
 .btn-add-candidate {
     padding: 11px 18px;
@@ -4696,3 +4697,136 @@ SETTINGS
                 white-space: nowrap;
             }
         }
+<<<<<<< HEAD
+=======
+
+
+        /* #postJobBtn {
+    display: none !important;
+} */
+
+
+/* ==============================
+SETTINGS MOBILE RESPONSIVE
+================================*/
+
+/* Tablet */
+@media (max-width: 1024px) {
+
+    .dashboard-content{
+        padding:20px;
+    }
+
+    .settings-content-area{
+        padding:25px;
+    }
+
+    .settings-grid{
+        grid-template-columns:1fr;
+        gap:20px;
+    }
+
+}
+
+
+/* Mobile */
+@media (max-width: 768px) {
+
+    .dashboard-content{
+        padding:15px;
+    }
+
+    .settings-page-header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+        padding:18px;
+    }
+
+    .settings-main-title{
+        font-size:20px;
+    }
+
+    .settings-subtitle{
+        font-size:13px;
+    }
+
+    .settings-horizontal-menu{
+        width:100%;
+        overflow-x:auto;
+        padding:8px;
+        gap:8px;
+    }
+
+    .settings-nav-btn{
+        padding:10px 18px;
+        font-size:14px;
+        white-space:nowrap;
+    }
+
+    .settings-content-area{
+        padding:20px;
+    }
+
+    .settings-grid{
+        grid-template-columns:1fr;
+        gap:20px;
+    }
+
+    .settings-modern-card{
+        padding:22px;
+    }
+
+    .card-icon-header{
+        gap:12px;
+        margin-bottom:20px;
+    }
+
+    .icon-circle{
+        width:42px;
+        height:42px;
+        font-size:20px;
+    }
+
+    .card-icon-header h3{
+        font-size:17px;
+    }
+
+    .form-floating-custom input,
+    .form-floating-custom select{
+        padding:12px 14px;
+        font-size:14px;
+    }
+
+    .btn-save-modern{
+        width:100%;
+        padding:12px;
+        font-size:14px;
+    }
+
+}
+
+
+/* Small Mobile */
+@media (max-width: 480px){
+
+    .settings-main-title{
+        font-size:18px;
+    }
+
+    .settings-modern-card{
+        padding:18px;
+        border-radius:12px;
+    }
+
+    .settings-content-area{
+        padding:16px;
+    }
+
+    .form-floating-custom input,
+    .form-floating-custom select{
+        padding:11px 12px;
+    }
+
+}
+>>>>>>> 9ecc97eb80ba2736e0490d035b3dce6d7b4fe6fb
